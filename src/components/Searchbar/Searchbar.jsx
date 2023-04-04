@@ -1,37 +1,43 @@
-import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { FaSearch } from 'react-icons/fa';
-import { SearchHeader, SearchForm, Input, SearchBtn } from './Searchbar.styled';
+import { Header, SearchForm, SearchFormBtn, Input } from './Searchbar.styled';
+import { GoSearch } from 'react-icons/go';
+import PropTypes from 'prop-types';
 
-const initialValues = {
-  query: '',
-};
-
-export const Searchbar = ({ onSubmit }) => {
+const Searchbar = ({ onSubmit }) => {
   return (
-    <SearchHeader>
+    <Header>
       <Formik
-        initialValues={initialValues}
-        onSubmit={(values, actions) => onSubmit(values, actions)}
+        initialValues={{ name: '' }}
+        onSubmit={(values, actions) => {
+          const { name } = values;
+          if (!name.trim()) {
+            return;
+          }
+          onSubmit(name.trim());
+          actions.resetForm();
+        }}
       >
-        <SearchForm>
-          <SearchBtn type="submit">
-            <FaSearch />
-          </SearchBtn>
+        {props => (
+          <SearchForm onSubmit={props.handleSubmit}>
+            <SearchFormBtn type="submit" aria-label="search">
+              <GoSearch />
+            </SearchFormBtn>
 
-          <Input
-            name="query"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-          />
-        </SearchForm>
+            <Input
+              type="text"
+              name="name"
+              autoFocus
+              placeholder="Search images and photos"
+            />
+          </SearchForm>
+        )}
       </Formik>
-    </SearchHeader>
+    </Header>
   );
 };
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+export default Searchbar;

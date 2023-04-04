@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
 import { ColorRing } from 'react-loader-spinner';
-import { Background } from './Loader.styled';
+import { Container } from './Loader.styled';
 
-export const Loader = ({ visible }) => {
+const Loader = visible => {
   return (
-    <Background>
+    <Container>
       <ColorRing
         visible={visible}
         height="150"
@@ -18,11 +17,9 @@ export const Loader = ({ visible }) => {
         }}
         wrapperClass="blocks-wrapper"
         colors={['#24045a', '#600fe2', '#945eeb', '#c2abe9', '#f1f1f1']}
-      />
-    </Background>
+      />{' '}
+    </Container>
   );
 };
 
-Loader.propTypes = {
-  visible: PropTypes.bool.isRequired,
-};
+export default Loader;
