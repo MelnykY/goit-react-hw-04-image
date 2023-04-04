@@ -1,9 +1,9 @@
 import { ColorRing } from 'react-loader-spinner';
-import { Container } from './Loader.styled';
+import { Background } from './Loader.styled';
 
 const Loader = visible => {
   return (
-    <Container>
+    <Background>
       <ColorRing
         visible={visible}
         height="150"
@@ -18,7 +18,7 @@ const Loader = visible => {
         wrapperClass="blocks-wrapper"
         colors={['#24045a', '#600fe2', '#945eeb', '#c2abe9', '#f1f1f1']}
       />{' '}
-    </Container>
+    </Background>
   );
 };
 
